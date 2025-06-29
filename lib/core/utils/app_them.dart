@@ -15,6 +15,12 @@ class AppTheme {
       foregroundColor: Colors.black,
       elevation: 0,
     ),
+    textTheme: ThemeData.light().textTheme.apply(
+      fontFamily: 'Chakra Petch',
+    ),
+    primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
+      fontFamily: 'Chakra Petch',
+    ),
   );
 
   // Dark theme configuration
@@ -28,6 +34,12 @@ class AppTheme {
       backgroundColor: AppColors.backgroundColor,
       foregroundColor: Colors.white,
       elevation: 0,
+    ),
+    textTheme: ThemeData.dark().textTheme.apply(
+      fontFamily: 'Chakra Petch',
+    ),
+    primaryTextTheme: ThemeData.dark().primaryTextTheme.apply(
+      fontFamily: 'Chakra Petch',
     ),
   );
 
