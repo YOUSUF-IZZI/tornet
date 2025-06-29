@@ -65,6 +65,7 @@ Connect everything together in the main app
 
 
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tornet/core/utils/app_them.dart';
 import 'package:tornet/presentaion/screens/match_table_screen.dart';
 
@@ -72,7 +73,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Set initial status bar style
   AppTheme.updateStatusBarStyle(ThemeMode.dark);
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,

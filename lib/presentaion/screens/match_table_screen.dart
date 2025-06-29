@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tornet/presentaion/widgets/blurry_circle.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:tornet/core/common/widgets/blurry_circle.dart';
+import 'package:tornet/presentaion/widgets/match_table_custom_tab_bar.dart';
+import 'package:tornet/presentaion/widgets/match_table_tabbar_view.dart';
 
-class MatchTableScreen extends StatelessWidget {
+class MatchTableScreen extends HookWidget {
   const MatchTableScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final tabController = useState('Today');
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -24,6 +28,9 @@ class MatchTableScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 13),
               child: Column(
                 children: [
+                  MatchTableCustomTabbar(tabController: tabController),
+                  const SizedBox(height: 20),
+                  MatchTableTabbarView(),
                 ],
               ),
             ),
