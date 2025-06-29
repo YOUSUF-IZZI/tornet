@@ -1,6 +1,77 @@
+/* Project plan
+1. UI Implementation
+You need to recreate a page based on the Figma design provided. From the image you shared, I can see it's a sports match schedule app with:
+
+A tabbed interface (Today, Upcoming, Past)
+Match listings grouped by leagues (LaLiga, Premier League)
+Team logos/jerseys with match times
+Clean, modern UI with a dark theme
+2. API Integration
+You need to integrate with three REST API endpoints:
+
+Today's Matches: https://staging.torliga.com/api/v1/home/todayMatches
+Past Matches: https://staging.torliga.com/api/v1/home/yesterdayMatches
+Upcoming Matches: https://staging.torliga.com/api/v1/home/tomorrowMatches
+All require the same authorization token: 15819|rX7ELUR9o4zNtSfCvAygVYvhTeiPGGBn18gNXotU3d8b99d2
+
+3. WebSocket Integration
+You need to implement real-time score updates using WebSocket:
+
+WebSocket URL: wss://mqtt.staging.torliga.com/app/4bae652d93c285868d11?protocol=7&client=js&version=4.3.1&flash=false
+Channel: "thesports-football.matchs"
+Event: "score-event"
+The payload will contain match IDs and scores
+4. Architecture Requirements
+Clean Architecture principles
+BLoC for state management
+Proper WebSocket handling for real-time updates
+Current Project State
+The project appears to be a fresh Flutter project with a basic structure. You've started setting up a folder structure that aligns with Clean Architecture:
+
+/lib/core: For core utilities and shared components
+/lib/data: For data sources, repositories implementations, and models
+/lib/domain: For entities, repositories interfaces, and use cases
+/lib/presentation: For UI components, screens, and BLoC
+The 
+home_screen.dart
+ file has been created but only contains a basic scaffold.
+
+Next Steps
+To complete this task, you'll need to:
+
+Add necessary dependencies to 
+pubspec.yaml
+:
+BLoC packages for state management
+HTTP package for API calls
+WebSocket package for real-time updates
+JSON serialization tools
+Implement the data layer:
+Create models for matches, teams, leagues
+Implement API services for fetching data
+Implement WebSocket service for real-time updates
+Implement the domain layer:
+Define entities
+Define repository interfaces
+Create use cases
+Implement the presentation layer:
+Create BLoCs for managing state
+Build UI components based on the Figma design
+Implement the tabbed interface
+Create match list widgets
+Connect everything together in the main app
+*/
+
+
+
 import 'package:flutter/material.dart';
+import 'package:tornet/core/utils/app_them.dart';
+import 'package:tornet/presentaion/screens/match_table_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Set initial status bar style
+  AppTheme.updateStatusBarStyle(ThemeMode.dark);
   runApp(const MyApp());
 }
 
@@ -11,112 +82,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      theme: AppTheme.darkTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.dark,
+      home: const MatchTableScreen(),
     );
   }
 }
