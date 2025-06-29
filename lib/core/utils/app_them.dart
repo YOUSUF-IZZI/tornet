@@ -15,9 +15,7 @@ class AppTheme {
       foregroundColor: Colors.black,
       elevation: 0,
     ),
-    textTheme: ThemeData.light().textTheme.apply(
-      fontFamily: 'Chakra Petch',
-    ),
+    textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Chakra Petch'),
     primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
       fontFamily: 'Chakra Petch',
     ),
@@ -35,9 +33,7 @@ class AppTheme {
       foregroundColor: Colors.white,
       elevation: 0,
     ),
-    textTheme: ThemeData.dark().textTheme.apply(
-      fontFamily: 'Chakra Petch',
-    ),
+    textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Chakra Petch'),
     primaryTextTheme: ThemeData.dark().primaryTextTheme.apply(
       fontFamily: 'Chakra Petch',
     ),
@@ -49,7 +45,8 @@ class AppTheme {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark, // Dark icons for light theme
+          statusBarIconBrightness:
+              Brightness.dark, // Dark icons for light theme
           statusBarBrightness: Brightness.light, // iOS uses opposite
         ),
       );
@@ -57,7 +54,8 @@ class AppTheme {
       SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light, // Light icons for dark theme
+          statusBarIconBrightness:
+              Brightness.light, // Light icons for dark theme
           statusBarBrightness: Brightness.dark, // iOS uses opposite
         ),
       );

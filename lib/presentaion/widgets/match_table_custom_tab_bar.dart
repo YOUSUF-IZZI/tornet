@@ -30,9 +30,19 @@ class MatchTableCustomTabbar extends StatelessWidget {
           height: 40,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: ShapeDecoration(
-            color: title == tabController.value ? null : const Color(0xFF36383A),
-            gradient: title == tabController.value ? LinearGradient(begin: Alignment(-0.00, 0.00), end: Alignment(1.00, 1.00), colors: [const Color(0xFF86F14D), const Color(0xFFE6FF48)]) : null,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            color: title == tabController.value
+                ? null
+                : const Color(0xFF36383A),
+            gradient: title == tabController.value
+                ? LinearGradient(
+                    begin: Alignment(-0.00, 0.00),
+                    end: Alignment(1.00, 1.00),
+                    colors: [const Color(0xFF86F14D), const Color(0xFFE6FF48)],
+                  )
+                : null,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -43,7 +53,9 @@ class MatchTableCustomTabbar extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: title == tabController.value ? const Color(0xFF2E3236) : const Color(0xFF949699),
+                  color: title == tabController.value
+                      ? const Color(0xFF2E3236)
+                      : const Color(0xFF949699),
                   fontSize: 12,
                   fontFamily: 'Chakra Petch',
                   fontWeight: FontWeight.w700,

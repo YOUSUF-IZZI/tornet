@@ -62,8 +62,6 @@ Create match list widgets
 Connect everything together in the main app
 */
 
-
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tornet/core/utils/app_them.dart';

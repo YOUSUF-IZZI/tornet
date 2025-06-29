@@ -24,22 +24,11 @@ class BlurryCircle extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: begin,
-          end: end,
-          colors: colors,
-        ),
+        gradient: LinearGradient(begin: begin, end: end, colors: colors),
       ),
       child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: blurSigma,
-          sigmaY: blurSigma,
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-          ),
-        ),
+        filter: ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma),
+        child: Container(decoration: BoxDecoration(color: Colors.transparent)),
       ),
     );
   }
