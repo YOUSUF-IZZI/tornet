@@ -7,14 +7,14 @@ import 'package:tornet/presentaion/bloc/matches_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MatchesCubit extends Cubit<MatchesState> {
-  final DioServices _dioServices;
+  final _apiServices = DioServices(Dio());
 
-  MatchesCubit(this._dioServices) : super(MatchesInitial());
+  MatchesCubit() : super(MatchesInitial());
 
   Future<void> fetchTodayMatches() async {
     emit(MatchesLoading());
     try {
-      final response = await _dioServices.get(ApiConstants.todayMatches);
+      final response = await _apiServices.get(ApiConstants.todayMatches);
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {
@@ -33,7 +33,7 @@ class MatchesCubit extends Cubit<MatchesState> {
   Future<void> fetchUpcomingMatches() async {
     emit(MatchesLoading());
     try {
-      final response = await _dioServices.get(ApiConstants.upcomingMatches);
+      final response = await _apiServices.get(ApiConstants.upcomingMatches);
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {
@@ -52,7 +52,7 @@ class MatchesCubit extends Cubit<MatchesState> {
   Future<void> fetchPastMatches() async {
     emit(MatchesLoading());
     try {
-      final response = await _dioServices.get(ApiConstants.pastMatches);
+      final response = await _apiServices.get(ApiConstants.pastMatches);
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {

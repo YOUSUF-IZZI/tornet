@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tornet/core/utils/app_them.dart';
+import 'package:tornet/presentaion/bloc/matches_cubit.dart';
 import 'package:tornet/presentaion/screens/match_table_screen.dart';
 
 void main() {
@@ -8,7 +10,10 @@ void main() {
   AppTheme.updateStatusBarStyle(ThemeMode.dark);
   runApp(
     ProviderScope(
-      child: const MyApp(),
+      child: BlocProvider(
+        create: (context) => MatchesCubit(),
+        child: const MyApp(),
+      ),
     ),
   );
 }
