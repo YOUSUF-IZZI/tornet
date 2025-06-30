@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tornet/core/common/widgets/app_loading_indicator.dart';
 
 class AppAuthenticatedImage extends StatelessWidget {
   final String? imageUrl;
@@ -51,7 +50,7 @@ class AppAuthenticatedImage extends StatelessWidget {
               ),
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
-                return AppLoadingIndicator();
+                return const Center(child: CircularProgressIndicator());
               },
               imageUrl!,
               headers: {

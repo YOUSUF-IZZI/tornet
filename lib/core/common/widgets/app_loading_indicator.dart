@@ -13,10 +13,7 @@ class AppLoadingIndicator extends StatelessWidget {
     return Center(
       child: Padding(
         padding: padding ?? const EdgeInsets.all(0.0),
-        child: CircularProgressIndicator(
-          strokeWidth: 6.0,
-          valueColor: AlwaysStoppedAnimation<Color>(color ?? AppColors.primaryColor),
-        ),
+        child: AppLoadingAnimationIndicator(),
       ),
     );
   }

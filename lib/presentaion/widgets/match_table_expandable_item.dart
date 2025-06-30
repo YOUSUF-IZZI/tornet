@@ -22,9 +22,15 @@ class MatchTableExpandableItem extends StatelessWidget {
       // League logo + League name
       title: Row(
         children: [
-          AppAuthenticatedImage(imageUrl: match.data?[0].competition?.logo, width: 20, height: 20),
+          AppAuthenticatedImage(imageUrl: match.data?[0].competition?.logo, width: 24, height: 24),
           const SizedBox(width: 8),
-          Text(match.data?[0].competition?.name ?? '', style: TextStyle(color: Colors.white.withValues(alpha: 0.80), fontWeight: FontWeight.bold)),
+          Expanded(
+            child: Text(
+              match.data?[0].competition?.name ?? '', 
+              style: TextStyle(color: Colors.white.withValues(alpha: 0.80), fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
       // Matches
