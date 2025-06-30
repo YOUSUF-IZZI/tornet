@@ -1,0 +1,70 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:tornet/core/network/api_constants.dart';
+import 'package:tornet/core/network/dio_services.dart';
+import 'package:tornet/data/models/match_model/match_model.dart';
+import 'package:tornet/presentaion/bloc/matches_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class MatchesCubit extends Cubit<MatchesState> {
+  final DioServices _dioServices;
+
+  MatchesCubit(this._dioServices) : super(MatchesInitial());
+
+  Future<void> fetchTodayMatches() async {
+    emit(MatchesLoading());
+    try {
+      final response = await _dioServices.get(ApiConstants.todayMatches);
+      final matchModel = MatchModel.fromJson(response.data);
+      emit(MatchesLoadedSuccessfuly(match: matchModel));
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print('DioException in fetchTodayMatches: ${e.message}');
+      }
+      emit(MatchesError(message: e.toString()));
+    } catch (e) {
+      if (kDebugMode) {
+        print('Exception in fetchTodayMatches: ${e.toString()}');
+      }
+      emit(MatchesError(message: e.toString()));
+    }
+  }
+
+  Future<void> fetchUpcomingMatches() async {
+    emit(MatchesLoading());
+    try {
+      final response = await _dioServices.get(ApiConstants.upcomingMatches);
+      final matchModel = MatchModel.fromJson(response.data);
+      emit(MatchesLoadedSuccessfuly(match: matchModel));
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print('DioException in fetchUpcomingMatches: ${e.message}');
+      }
+      emit(MatchesError(message: e.toString()));
+    } catch (e) {
+      if (kDebugMode) {
+        print('Exception in fetchUpcomingMatches: ${e.toString()}');
+      }
+      emit(MatchesError(message: e.toString()));
+    }
+  }
+
+  Future<void> fetchPastMatches() async {
+    emit(MatchesLoading());
+    try {
+      final response = await _dioServices.get(ApiConstants.pastMatches);
+      final matchModel = MatchModel.fromJson(response.data);
+      emit(MatchesLoadedSuccessfuly(match: matchModel));
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print('DioException in fetchPastMatches: ${e.message}');
+      }
+      emit(MatchesError(message: e.toString()));
+    } catch (e) {
+      if (kDebugMode) {
+        print('Exception in fetchPastMatches: ${e.toString()}');
+      }
+      emit(MatchesError(message: e.toString()));
+    }
+  }
+}
