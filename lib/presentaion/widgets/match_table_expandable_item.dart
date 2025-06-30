@@ -23,7 +23,7 @@ class MatchTableExpandableItem extends StatelessWidget {
         children: [
           Image.network(match.data?[0].competition?.logo ?? '', height: 20, width: 20),
           const SizedBox(width: 8),
-          Text(match.data?[0].competition?.name ?? '', style: const TextStyle(color: Colors.white)),
+          Text(match.data?[0].competition?.name ?? '', style: TextStyle(color: Colors.white.withValues(alpha: 0.80), fontWeight: FontWeight.bold)),
         ],
       ),
       // Matches
