@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -71,7 +69,7 @@ class DioServices extends ApiServices {
         responseHeader: true,
         responseBody: true,
         error: true,
-        compact: false,
+        compact: true,
         maxWidth: 120,
       ),
     );

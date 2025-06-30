@@ -39,9 +39,7 @@ class MatchesCubit extends Cubit<MatchesState> {
   Future<void> fetchPastMatches() async {
     emit(MatchesLoading());
     try {
-      final response = await _apiServices.get(
-        ApiConstants.pastMatches,
-      );
+      final response = await _apiServices.get(ApiConstants.pastMatches);
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {

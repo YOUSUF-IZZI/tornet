@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tornet/presentaion/bloc/matches_cubit.dart';
 
 class MatchTableCustomTabbar extends StatelessWidget {
   const MatchTableCustomTabbar({super.key, required this.tabController});
@@ -10,20 +12,31 @@ class MatchTableCustomTabbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildTabBarButton(title: 'Today'),
+        _buildTabBarButton(title: 'Today', context: context),
         SizedBox(width: 4),
-        _buildTabBarButton(title: 'Upcoming'),
+        _buildTabBarButton(title: 'Upcoming', context: context),
         SizedBox(width: 4),
-        _buildTabBarButton(title: 'Past'),
+        _buildTabBarButton(title: 'Past', context: context),
       ],
     );
   }
 
-  Widget _buildTabBarButton({required String title}) {
+  Widget _buildTabBarButton({required String title, required BuildContext context}) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
           tabController.value = title;
+          switch (title) {
+            case 'Today':
+              context.read<MatchesCubit>().fetchTodayMatches();
+              break;
+            case 'Past':
+              context.read<MatchesCubit>().fetchPastMatches();
+              break;
+            case 'Upcoming':
+              context.read<MatchesCubit>().fetchUpcomingMatches();
+              break;
+          }
         },
         child: Container(
           width: 100,

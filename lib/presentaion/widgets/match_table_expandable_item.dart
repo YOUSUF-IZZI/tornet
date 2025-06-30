@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tornet/core/common/widgets/app_network_image.dart';
 import 'package:tornet/core/utils/app_colors.dart';
 import 'package:tornet/data/models/match_model/match.dart';
 import 'package:tornet/data/models/match_model/match_model.dart';
@@ -21,7 +22,7 @@ class MatchTableExpandableItem extends StatelessWidget {
       // League logo + League name
       title: Row(
         children: [
-          Image.network(match.data?[0].competition?.logo ?? '', height: 20, width: 20),
+          AppAuthenticatedImage(imageUrl: match.data?[0].competition?.logo, width: 20, height: 20),
           const SizedBox(width: 8),
           Text(match.data?[0].competition?.name ?? '', style: TextStyle(color: Colors.white.withValues(alpha: 0.80), fontWeight: FontWeight.bold)),
         ],
@@ -51,14 +52,14 @@ class MatchTableExpandableItem extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.network(match.homeTeam?.logo ?? '', height: 32, width: 32), //! use app network image later.
+              AppAuthenticatedImage(imageUrl: match.homeTeam?.logo, width: 32, height: 32),
               const SizedBox(width: 8),
               Text(
                 match.matchTime ?? 'xx:xx',
                 style: const TextStyle(color: Color(0xFF949699), fontWeight: FontWeight.bold),
               ),
               const SizedBox(width: 8),
-              Image.network(match.awayTeam?.logo ?? '', height: 32, width: 32), //! use app network image later.
+              AppAuthenticatedImage(imageUrl: match.awayTeam?.logo, width: 32, height: 32),
             ],
           ),
           const SizedBox(width: 8),
