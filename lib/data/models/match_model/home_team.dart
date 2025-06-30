@@ -4,7 +4,7 @@ class HomeTeam {
   String? name;
   String? shortName;
   String? logo;
-  List<int>? score;
+  List<dynamic>? score;
   String? shirt;
   bool? isDefaultShirt;
   bool? national;
@@ -27,7 +27,7 @@ class HomeTeam {
     name: json['name'] as String?,
     shortName: json['short_name'] as String?,
     logo: json['logo'] as String?,
-    score: json['score'] as List<int>?,
+    score: json['score'] as List<dynamic>?,
     shirt: json['shirt'] as String?,
     isDefaultShirt: json['is_default_shirt'] as bool?,
     national: json['national'] as bool?,
@@ -51,7 +51,7 @@ class HomeTeam {
     String? name,
     String? shortName,
     String? logo,
-    List<int>? score,
+    List<dynamic>? score,
     String? shirt,
     bool? isDefaultShirt,
     bool? national,

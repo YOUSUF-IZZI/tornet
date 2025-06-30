@@ -71,41 +71,8 @@ class DioServices extends ApiServices {
         responseHeader: true,
         responseBody: true,
         error: true,
-        compact: true,
+        compact: false,
         maxWidth: 120,
-        // Use a custom logPrint function with ANSI color codes for colorful output
-        logPrint: (object) {
-          // Only use colors in debug mode
-          if (kDebugMode && !Platform.isIOS) {
-            // Define ANSI color codes
-            const String reset = '\x1B[0m';
-            const String red = '\x1B[31m';
-            const String green = '\x1B[32m';
-            const String yellow = '\x1B[33m';
-            const String magenta = '\x1B[35m';
-            const String white = '\x1B[37m';
-
-            // Add colors based on content type
-            final String text = object.toString();
-            if (text.contains('Request ║ POST') || text.contains('Request ║ GET') || text.contains('Request ║ PUT') || text.contains('Request ║ DELETE')) {
-              debugPrint('$yellow$text$reset');
-            } else if (text.contains('Status: 200')) {
-              debugPrint('$green$text$reset');
-            } else if (text.contains('Response ')) {
-              debugPrint('$magenta$text$reset');
-            } else if (text.contains('Headers ')) {
-              debugPrint('$magenta$text$reset');
-            } else if (text.contains('Body')) {
-              debugPrint('$magenta$text$reset');
-            } else if (text.contains('DioError ║') || text.contains('DioException:')) {
-              debugPrint('$red$text$reset');
-            } else {
-              debugPrint('$white$text$reset');
-            }
-          } else {
-            debugPrint(object.toString());
-          }
-        },
       ),
     );
 

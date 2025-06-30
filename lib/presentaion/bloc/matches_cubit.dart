@@ -18,14 +18,10 @@ class MatchesCubit extends Cubit<MatchesState> {
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {
-      if (kDebugMode) {
-        print('DioException in fetchTodayMatches: ${e.message}');
-      }
+      print('DioException in fetchTodayMatches: ${e.message}');
       emit(MatchesError(message: e.toString()));
     } catch (e) {
-      if (kDebugMode) {
-        print('Exception in fetchTodayMatches: ${e.toString()}');
-      }
+      print('Exception in fetchTodayMatches: ${e.toString()}');
       emit(MatchesError(message: e.toString()));
     }
   }
@@ -37,33 +33,31 @@ class MatchesCubit extends Cubit<MatchesState> {
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {
-      if (kDebugMode) {
-        print('DioException in fetchUpcomingMatches: ${e.message}');
-      }
+      print('DioException in fetchUpcomingMatches: ${e.message}');
       emit(MatchesError(message: e.toString()));
     } catch (e) {
-      if (kDebugMode) {
-        print('Exception in fetchUpcomingMatches: ${e.toString()}');
-      }
+      print('Exception in fetchUpcomingMatches: ${e.toString()}');
       emit(MatchesError(message: e.toString()));
     }
   }
 
   Future<void> fetchPastMatches() async {
     emit(MatchesLoading());
+    Dio dio = Dio();
     try {
-      final response = await _apiServices.get(ApiConstants.pastMatches);
+      final response = await dio.get(
+        ApiConstants.pastMatches,
+        options: Options(
+          headers: {'Authorization': 'Bearer 15819|rX7ELUR9o4zNtSfCvAygVYvhTeiPGGBn18gNXotU3d8b99d2'},
+        ),
+      );
       final matchModel = MatchModel.fromJson(response.data);
       emit(MatchesLoadedSuccessfuly(match: matchModel));
     } on DioException catch (e) {
-      if (kDebugMode) {
-        print('DioException in fetchPastMatches: ${e.message}');
-      }
+      print('DioException in fetchPastMatches: ${e.message}');
       emit(MatchesError(message: e.toString()));
     } catch (e) {
-      if (kDebugMode) {
-        print('Exception in fetchPastMatches: ${e.toString()}');
-      }
+      print('Exception in fetchPastMatches: ${e.toString()}');
       emit(MatchesError(message: e.toString()));
     }
   }
