@@ -85,7 +85,7 @@ class DioServices extends ApiServices {
           if (!options.headers.containsKey('Authorization')) {
             // options.headers['Authorization'] = 'Bearer ${await SecureStorage().read(key: AppConstants.accessToken)}';
             //! Change it later, take the token from the secure storage like above.
-            options.headers['Authorization'] = '15819|rX7ELUR9o4zNtSfCvAygVYvhTeiPGGBn18gNXotU3d8b99d2';
+            options.headers['Authorization'] = 'Bearer 15819|rX7ELUR9o4zNtSfCvAygVYvhTeiPGGBn18gNXotU3d8b99d2';
           }
           return handler.next(options); //continue
         },
