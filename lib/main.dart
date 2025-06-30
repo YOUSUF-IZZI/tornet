@@ -69,7 +69,6 @@ import 'package:tornet/presentaion/screens/match_table_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Set initial status bar style
   AppTheme.updateStatusBarStyle(ThemeMode.dark);
   runApp(const ProviderScope(child: MyApp()));
 }
