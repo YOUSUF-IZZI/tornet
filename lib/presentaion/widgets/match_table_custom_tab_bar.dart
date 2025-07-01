@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tornet/core/utils/app_enums.dart';
 import 'package:tornet/presentaion/bloc/matches_cubit.dart';
 
 class MatchTableCustomTabbar extends StatelessWidget {
   const MatchTableCustomTabbar({super.key, required this.tabController});
 
-  final ValueNotifier<String> tabController;
+  final ValueNotifier<MatchDateType> tabController;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildTabBarButton(title: 'Today', context: context),
+        _buildTabBarButton(title: MatchDateType.today, context: context),
         SizedBox(width: 4),
-        _buildTabBarButton(title: 'Upcoming', context: context),
+        _buildTabBarButton(title: MatchDateType.upcoming, context: context),
         SizedBox(width: 4),
-        _buildTabBarButton(title: 'Past', context: context),
+        _buildTabBarButton(title: MatchDateType.past, context: context),
       ],
     );
   }
 
-  Widget _buildTabBarButton({required String title, required BuildContext context}) {
+  Widget _buildTabBarButton({required MatchDateType title, required BuildContext context}) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
           tabController.value = title;
           switch (title) {
-            case 'Today':
+            case MatchDateType.today:
               context.read<MatchesCubit>().fetchTodayMatches();
               break;
-            case 'Past':
+            case MatchDateType.past:
               context.read<MatchesCubit>().fetchPastMatches();
               break;
-            case 'Upcoming':
+            case MatchDateType.upcoming:
               context.read<MatchesCubit>().fetchUpcomingMatches();
               break;
           }
@@ -64,7 +65,7 @@ class MatchTableCustomTabbar extends StatelessWidget {
             spacing: 6,
             children: [
               Text(
-                title,
+                title.name,
                 style: TextStyle(
                   color: title == tabController.value
                       ? const Color(0xFF2E3236)

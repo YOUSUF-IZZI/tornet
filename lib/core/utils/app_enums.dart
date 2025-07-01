@@ -1,0 +1,1 @@
+enum MatchDateType { today, past, upcoming }

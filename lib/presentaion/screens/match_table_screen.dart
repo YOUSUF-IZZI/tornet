@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:tornet/core/common/widgets/blurry_circle.dart';
+import 'package:tornet/core/utils/app_enums.dart';
 import 'package:tornet/presentaion/widgets/match_table_custom_tab_bar.dart';
 import 'package:tornet/presentaion/widgets/match_table_tabbar_view.dart';
+
 
 class MatchTableScreen extends HookWidget {
   const MatchTableScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final tabController = useState('Today');
+    final tabController = useState(MatchDateType.today);
     return Scaffold(
       body: SafeArea(
         child: Stack(
